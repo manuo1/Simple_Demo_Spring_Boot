@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Message Page</title>
+</head>
+<body>
+
+<!-- form part -->
+	<h1>Ajouter un message</h1>
+	
+	<form action="#" th:action="@{/messages}" th:object="${newMessageForm}" method="post">
+		<p>Auteur : </p>
+		<input type="text" th:field="*{authorName}" placeholder="Nom de l'autheur" required="required">
+		<p>Message : </p>
+		<input type="text" th:field="*{content}" placeholder="Votre message" required="required">
+		<input type="submit" value="Save">
+	</form>
+
+<!-- display part -->
+
+	<h1>Liste des messages</h1>
+	<div th:each="message:${messagelist}">
+		<p th:text="'date: ' + ${#temporals.format(message.timeStamp, 'dd-MM-yyy HH:mm')}">(17-08-2021 16:29)</p>
+		<p th:text="'Auteur: ' + ${message.author.authorName}">(Auteur)</p>
+		<p th:text="'Sujet: ' + ${message.content}">(Sujet)</p>
+		<p>_________________________________________________________</p>
+	</div>
+
+</body>
+</html>
